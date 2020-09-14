@@ -71,7 +71,7 @@ namespace LearningCSharp
         [Fact]
         public void OtherFunThingsAboutStrings()
         {
-            var myName = "jeff";
+            var myName = "jeff"; 
             var otherName = myName.ToUpper(); // converts the string to upper?
             Assert.Equal("jeff", myName);
             Assert.Equal("JEFF", otherName);
