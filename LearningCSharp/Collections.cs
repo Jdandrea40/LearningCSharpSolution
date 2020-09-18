@@ -16,6 +16,7 @@ namespace LearningCSharp
             myFavoriteNumbers.Add(8);
             myFavoriteNumbers.Add(20);
             myFavoriteNumbers.Add(108);
+            
 
             Assert.Equal(8, myFavoriteNumbers[0]);
             myFavoriteNumbers[1] = 22;
@@ -33,11 +34,13 @@ namespace LearningCSharp
         [Fact]
         public void GenericFavoriteNumbers()
         {
+            
             var myFavoriteNumbers = new List<int>();
             // "Parametric Polymorphism"
             myFavoriteNumbers.Add(8);
             myFavoriteNumbers.Add(20);
             myFavoriteNumbers.Add(100);
+
 
             var firstTwo = myFavoriteNumbers[0] + myFavoriteNumbers[1];
             Assert.Equal(28, firstTwo);
