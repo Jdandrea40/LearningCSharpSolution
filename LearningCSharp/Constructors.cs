@@ -33,6 +33,9 @@ namespace LearningCSharp
 
             var folks = new List<Person> { judy, tempSue, retiree };
 
+            GiveThemARaise(judy, 100);
+
+            //GiveThemARaise(retiree, 10);
             foreach (var p in folks)
             {
                 _output.WriteLine(p.GetInfo());
@@ -40,9 +43,20 @@ namespace LearningCSharp
             }
 
 
+
+
+        }
+
+        public void GiveThemARaise(ICanBeGivenARaise person, decimal amount )
+        {
+            person.GiveRaise(amount);
         }
     }
 
+    public interface ICanBeGivenARaise
+    {
+        void GiveRaise(decimal amount);
+    }
     public abstract class Person
     {
         public Person(string name, string department)
@@ -61,7 +75,7 @@ namespace LearningCSharp
         public abstract string GetCompensation();
 
     }
-    public class Employee : Person
+    public class Employee : Person, ICanBeGivenARaise
     {
 
         public Employee(string name, string department, decimal salary) : base(name, department)
@@ -80,6 +94,11 @@ namespace LearningCSharp
         public override string GetCompensation()
         {
             return $"As an employee, {Name} gets a SALARY of {Salary:c}";
+        }
+
+        public void GiveRaise(decimal amount)
+        {
+            Salary += amount;
         }
     }
 
