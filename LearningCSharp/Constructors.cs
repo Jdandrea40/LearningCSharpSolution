@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Xunit;
 using Xunit.Abstractions;
@@ -32,17 +33,26 @@ namespace LearningCSharp
 
 
             var folks = new List<Person> { judy, tempSue, retiree };
-
+            GiveThemARaise(judy, 100);
             foreach (var p in folks)
             {
                 _output.WriteLine(p.GetInfo());
                 _output.WriteLine(p.GetCompensation());
             }
 
+            
+        }
 
+        public void GiveThemARaise(ICanBeGivenARaise person, decimal amount)
+        {
+            person.GiveRaise(amount);
         }
     }
 
+    public interface ICanBeGivenARaise
+    {
+        void GiveRaise(decimal amount);
+    }
     public abstract class Person
     {
         public Person(string name, string department)
@@ -61,7 +71,7 @@ namespace LearningCSharp
         public abstract string GetCompensation();
 
     }
-    public class Employee : Person
+    public class Employee : Person, ICanBeGivenARaise
     {
 
         public Employee(string name, string department, decimal salary) : base(name, department)
@@ -80,6 +90,11 @@ namespace LearningCSharp
         public override string GetCompensation()
         {
             return $"As an employee, {Name} gets a SALARY of {Salary:c}";
+        }
+
+        public void GiveRaise(decimal amount)
+        {
+           
         }
     }
 
